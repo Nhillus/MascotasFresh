@@ -56,7 +56,7 @@ class Animal extends Model
 
     public function modificarAnimal($id,$nombre) {
         $animal = Animal::findOrFail($id);
-        $animalModificada = $animal->nombre; //luego esta linea se refactoriza
+        $animalModificado = $animal->nombre; //luego esta linea se refactoriza
         $animal->nombre = $nombre;
         $animal->save();
         if (!$animalModificado) {
@@ -64,7 +64,7 @@ class Animal extends Model
         }
         return response()->json(["success"=>true, 
                                  "message" =>'Encontrado con exito el animal y modificado', 
-                                 "Animal_Previa_A_La_Modificacion" => $animalModificada,
+                                 "Animal_Previa_A_La_Modificacion" => $animalModificado,
                                  "Animal_Actual" => $animal],200);
 
     }
@@ -84,8 +84,8 @@ class Animal extends Model
     }
 
     public function getAllAnimales() {
-        $animal = Animal::all();
-        return $animal; 
+        $animales = Animal::all();
+        return $animales; 
     }
 
     public function cuidadores() {

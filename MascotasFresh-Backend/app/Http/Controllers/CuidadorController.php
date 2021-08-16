@@ -7,79 +7,24 @@ use Illuminate\Http\Request;
 
 class CuidadorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function index() {
+        $cuidador = new Cuidador;
+        $allCuidadores = $cuidador->getAllCuidadores(); 
+        return ['Cuidadores'=> $allCuidadores];
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+            $cuidador = new Cuidador;
+            $response=$cuidador->Cuidador($request);
+            return $response;
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function update (Request $request) {
+        $cuidador = new Cuidador;
+        $response = $cuidador->modificarCuidador($request->id,$request->nombre);
+        return $response;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Cuidador  $cuidador
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cuidador $cuidador)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Cuidador  $cuidador
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cuidador $cuidador)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cuidador  $cuidador
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cuidador $cuidador)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cuidador  $cuidador
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cuidador $cuidador)
-    {
-        //
+    public function destroy ($id) {
+        $cuidador = new Cuidador;
+        $response = $cuidador->eliminarCuidador($id);
+        return $response;
     }
 }
