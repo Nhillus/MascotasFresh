@@ -12,74 +12,30 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function index() {
+        $animal = new Animal;
+        $allAnimales = $animal->getAllAnimales();
+        return ['animales'=> $allAnimales];
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+            $animal = new Animal;
+            $response=$animal->Animal($request);
+            return $response;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Animal  $animal
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Animal $animal)
-    {
-        //
+    public function update (Request $request) {
+        $animal = new Animal;
+        $response = $animal->modificarAnimal($request->id,$request->nombre);
+        return $response;
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Animal  $animal
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Animal $animal)
-    {
-        //
+    public function destroy ($id) {
+        $animal = new Animal;
+        $response = $animal->eliminarAnimal($id);
+        return $response;
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Animal  $animal
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Animal $animal)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Animal  $animal
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Animal $animal)
-    {
-        //
+    public function UpdateStatus(Request $request) {
+        $animal = new Animal;
+        $response = $animal->modificarEstado($request->id,$request->estado);
+        return $response;
     }
 }

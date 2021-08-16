@@ -11,15 +11,15 @@ class Animal extends Model
     Protected $fillable = ["especie","raza","nombre","nacimiento","esterilizado"];
     Protected $cast = ['esterilizado' => 'boolean'];
 
-    public function Animal($especie,$raza,$nombre,$nacimiento,$esterelizado) {
+    public function Animal($request) {
         
         $animal = new Animal;
         
-        $animal->especie = $especie;
-        $animal->raza = $raza;
-        $animal->nombre = $nombre;
-        $animal->nacimiento = $nacimiento;
-        $animal->esterelizado = $esterelizado;
+        $animal->especie = $request->especie;
+        $animal->raza = $request->raza;
+        $animal->nombre = $request->nombre;
+        $animal->nacimiento = $request->nacimiento;
+        $animal->esterelizado = $request->esterelizado;
         $animal->save();
         if (!$animal) {
             return response()->json(["success"=>false, "message" =>'Registro de animal fallida'],500);
