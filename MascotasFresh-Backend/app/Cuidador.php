@@ -71,6 +71,6 @@ class Cuidador extends Model
     }
 
     public function animales() {
-        return $this->hasMany(Animal::class);
+        return $this->belongsToMany(Animal::class,'Animal_Cuidador');
     }
 }

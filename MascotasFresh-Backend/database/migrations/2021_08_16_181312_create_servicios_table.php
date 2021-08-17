@@ -18,13 +18,7 @@ class CreateServiciosTable extends Migration
             $table->string('nombre');
             $table->string('tipo');
             $table->string('descripcion');
-            $table->string('animal_id');
-            $table->string('medico_id');            
             $table->timestamps();
-        });
-        Schema::table('servicios',function (Blueprint $table){
-            $table->foreign('animal_id')->references('id')->on('animal')->onDelete('cascade');
-            $table->foreign('cuidador_id')->references('id')->on('cuidador')->onDelete('cascade');        
         });
     }
 

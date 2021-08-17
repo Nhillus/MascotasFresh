@@ -15,13 +15,13 @@ class CreateAnimalCuidadorsTable extends Migration
     {
         Schema::create('animal__cuidadors', function (Blueprint $table) {
             $table->id();
-            $table->string('animal_id');
-            $table->string('cuidador_id');
+            $table->unsignedBigInteger('animal_id');
+            $table->unsignedBigInteger('cuidador_id');
             $table->timestamps();
         });
         Schema::table('animal__cuidadors',function (Blueprint $table) {
-            $table->foreign('animal_id')->references('id')->on('animal')->onDelete('cascade');
-            $table->foreign('cuidador_id')->references('id')->on('cuidador')->onDelete('cascade');
+            $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
+            $table->foreign('cuidador_id')->references('id')->on('cuidadors')->onDelete('cascade');
         });
     }
 

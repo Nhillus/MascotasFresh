@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Cuidador;
+use App\Medico;
+use App\Servicio;
 
 class Animal extends Model
 {
@@ -89,7 +91,15 @@ class Animal extends Model
     }
 
     public function cuidadores() {
-        return $this->hasMany(Cuidador::class);
+        return $this->belongsToMany(Cuidador::class, 'animal_cuidador');
+    }
+
+    public function medicos() {
+        return $this->belongsToMany(Medico::class, 'medico_servicio_animal');
+    }
+
+    public function servicios() {
+        return $this->belongsToMany(Servicio::class, 'medico_servicio_animal');
     }
 
 }
