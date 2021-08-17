@@ -7,79 +7,24 @@ use Illuminate\Http\Request;
 
 class MedicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function index() {
+        $medico = new Medico;
+        $allMedicos = $medico->getAllMedicos(); 
+        return ['Medicos'=> $allMedicos];
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+            $medico = new Medico;
+            $response=$medico->Medico($request);
+            return $response;
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function update (Request $request) {
+        $medico = new Medico;
+        $response = $medico->modificarMedico($request->id,$request->nombre);
+        return $response;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Medico $medico)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Medico $medico)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Medico $medico)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Medico $medico)
-    {
-        //
+    public function destroy ($id) {
+        $medico = new Medico;
+        $response = $medico->eliminarCuidador($id);
+        return $response;
     }
 }
