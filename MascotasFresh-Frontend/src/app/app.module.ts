@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerAdapterComponent } from './datepicker-adapter/datepicker-adapter.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 
@@ -25,6 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     DatepickerAdapterComponent,
     LoginComponent,
     NavbarComponent,
+    RegistroComponent,
     
     
   ],

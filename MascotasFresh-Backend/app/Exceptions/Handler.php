@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException as ValidationException ;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +51,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($exception instanceof ValidationException)
+        {
+            return response([
+                'error' => $exception->errors()
+            ], 400);
+        }
+        
+        //return response(['error'=> $exception->getMessage()],$exception->getCode() ?:400);
         return parent::render($request, $exception);
 
         
