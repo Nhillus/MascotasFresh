@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+/*--------------- Rutas Animales ----------------------------*/
+Route::get('/animales','AnimalController@index');
+Route::post('/agregaranimal', 'AnimalController@store');
+Route::put('/modificaranimal', 'AnimalController@update');
+Route::delete('/eliminaranimal/{id}', 'AnimalController@destroy');
+/*----------------Rutas Usuario ---------------------------------*/
+Route::get('/user', 'UserController@user')->middleware('auth:api');

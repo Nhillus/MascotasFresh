@@ -21,7 +21,7 @@ class Animal extends Model
         $animal->raza = $request->raza;
         $animal->nombre = $request->nombre;
         $animal->nacimiento = $request->nacimiento;
-        $animal->esterelizado = $request->esterelizado;
+        $animal->esterilizado = $request->esterilizado;
         $animal->save();
         if (!$animal) {
             return response()->json(["success"=>false, "message" =>'Registro de animal fallida'],500);

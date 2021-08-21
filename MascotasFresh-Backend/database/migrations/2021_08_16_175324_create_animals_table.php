@@ -18,7 +18,7 @@ class CreateAnimalsTable extends Migration
             $table->string('especie');
             $table->string('raza');
             $table->string('nombre');
-            $table->dateTime('nacimiento',0);
+            $table->date('nacimiento');
             $table->boolean('esterilizado')->default(0);
             $table->timestamps();
         });

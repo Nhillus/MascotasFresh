@@ -1,0 +1,35 @@
+  <br/>
+  <div class="row">
+  
+  
+    <div class="col-6">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy/mm/dd"
+                   name="d2" #c2="ngModel" [(ngModel)]="this.var" ngbDatepicker #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+  
+      <hr />
+
+
+
+<button class="button" type="submit" (click)="addNewItem()">agregar</button>
+
+
+
+      <hr />
+  
+    </div>
+    
+
+    <p> 
+    </p> 
+
+  
+  </div>

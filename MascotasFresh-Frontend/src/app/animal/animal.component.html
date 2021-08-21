@@ -1,0 +1,97 @@
+
+  <app-navbar></app-navbar>
+  <hr>
+  <hr>
+  <div class="container">
+    <h3 *ngIf="user">  Hola Doctor {{this.user?.name}}</h3> <!-- use ?. porque no existe la plantilla en el animal ts, por eso uso la etiqueta que tendrias un comportamiento parecido al any, tambien una solucion seria usar nngIf como tambien deje en el codigo en el caso que no exista el usuario sabe que hacer y no lo rederiza-->
+    <div class="row">
+      <div class="col-10">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+          <i class="bi bi-plus">Nuevo Peludo</i>
+        </button>
+      </div>
+    </div>
+  </div>
+<!-- --------------------------------------------------formulariooooooooooooo para agregar nuevos animalesss (pacientes) ------------------------------------------------>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="checkoutForm" (ngSubmit)="addAnimal()">
+
+          <div class="form-floating mb-3">
+            <input id="floatingEspecie" type="text" class="form-control" formControlName="especie" placeholder="Especie">
+            <label for="floatingEspecie">Especie</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingRaza" type="text" class="form-control" formControlName="raza" placeholder="Raza">
+            <label for="floatingRaza">Raza</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingNombre" type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+            <label for="floatingNombre">Nombre</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="esterilizado"  id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Default checkbox
+            </label>
+          </div>
+          <!---Etiqueta datepicker-->
+          <div class="form-floating mb-3">
+              <app-datepicker-adapter (newItemEvent)="addItem($event)"></app-datepicker-adapter>
+          </div>
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        Column
+      </div>
+      <div class="col-10">
+      
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">especie</th>
+        <th scope="col">raza</th>
+        <th scope="col">nombre</th>
+        <th scope="col">nacimiento</th>
+        <th scope="col">esterilizado</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let animal of animales">
+      <tr>
+        <th scope="row">{{animal.id}}</th>
+        <td> {{animal.especie}}  </td>
+        <td>{{animal.raza}}</td>
+        <td>{{animal.nombre}}</td>
+        <td>{{animal.nacimiento}}</td>
+        <td>{{animal.esterilizado}}</td>
+      </tr>
+  
+    </tbody>
+  </table>
+
+  </div>
+
