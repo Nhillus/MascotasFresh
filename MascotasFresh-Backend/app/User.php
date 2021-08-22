@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Servicio;
+use App\Animal;
+
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -38,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function animales() {
+        return $this->hasMany(Animal::class, 'medico_servicio_animal');
+    }
+
+    public function servicios() {
+        return $this->belongsToMany(Servicio::class, 'medico_servicio_animal');
+    }
 }

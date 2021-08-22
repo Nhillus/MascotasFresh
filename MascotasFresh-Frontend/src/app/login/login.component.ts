@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       password: formData.password,
       grant_type:'password',
       client_id: '2',
-      client_secret:'EcCYLseTFLtRJB4EbaMsH9NjR4D7scqprhR9Bs4s',
+      client_secret:'1OKmZZiA951nifhhLSpb1A0PsSsFtt9Gx1hzRhDK',
       scope:'*'
     };
     let headers = new HttpHeaders({

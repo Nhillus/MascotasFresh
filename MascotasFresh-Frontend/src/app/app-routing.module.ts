@@ -5,11 +5,14 @@ import { AnimalComponent } from './animal/animal.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { CitaComponent } from './cita/cita.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'animal', component: AnimalComponent },
   { path: 'login', component: LoginComponent},
   { path: 'registro', component: RegistroComponent},
+  { path: 'cita', component:CitaComponent},
 
 ]; // sets up routes constant where you define your routes
 

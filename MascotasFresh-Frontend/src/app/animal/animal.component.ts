@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ServiciosService } from '../servicios.service';
 import { DatepickerAdapterComponent } from '../datepicker-adapter/datepicker-adapter.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-animal',
@@ -41,6 +42,7 @@ export class AnimalComponent implements OnInit {
   animales:any=[];
 
   user: {
+    id:any,
     name:any,
     email:any,
   };
@@ -49,26 +51,13 @@ export class AnimalComponent implements OnInit {
   constructor(private servicios:ServiciosService,
               private formBuilder: FormBuilder, 
               private http: HttpClient,
-              private router: Router) {
+              private router:Router,
+            ) {
    
   }
 
   ngOnInit(): void {
-    let headers = new HttpHeaders({
-      'Authorization':`Bearer ${localStorage.getItem('token')}`,
-      'Access-Control-Allow-Origin': 'http://localhost:8000',
-      'Access-Control-Allow-Credentials':'true',
-    });
-    let options = { headers: headers };    
-    this.http.get('http://localhost:8000/api/user', options).subscribe((
-      (response:any) => 
-          this.user = response
-      ),
-      err=> {
-        localStorage.removeItem('token');
-        this.router.navigate(['login']);
-      }
-    );
+   this.getUser();
     this.getAnimales();
   }
 
@@ -97,5 +86,26 @@ export class AnimalComponent implements OnInit {
     alert(respuesta);
    }
 
+   getUser() {
+     this.servicios.getUser().subscribe((
+      (response:any) => 
+          this.user = response 
+          
+      ),
+      
+      err=> {
+        localStorage.removeItem('token');
+        this.router.navigate(['login']);
+      }
+     )}
 
+
+     id_animal:number;
+  
+
+    seleccionado(animal:any){
+      this.id_animal=animal;
+      console.log(this.id_animal);
+
+}
 }

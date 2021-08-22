@@ -12,6 +12,7 @@ import { DatepickerAdapterComponent } from './datepicker-adapter/datepicker-adap
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
+import { CitaComponent } from './cita/cita.component';
 
 
 
@@ -27,6 +28,7 @@ import { RegistroComponent } from './registro/registro.component';
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
+    CitaComponent,
     
     
   ],

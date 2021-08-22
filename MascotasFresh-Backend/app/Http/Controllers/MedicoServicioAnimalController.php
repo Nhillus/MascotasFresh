@@ -33,10 +33,11 @@ class MedicoServicioAnimalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {
+        $cita = new medico_servicio_animal;
+        $response=$cita->cita($request);
+        return $response;
+}
 
     /**
      * Display the specified resource.

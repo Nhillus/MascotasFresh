@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
+
 
 
 
@@ -18,6 +19,7 @@ const API_URL: string = 'http://localhost:8000/api';
 
 
 export class ServiciosService {
+  user:any;
  
   constructor(private http: HttpClient) { 
   }
@@ -30,18 +32,38 @@ export class ServiciosService {
   }
 
 
-  addAnimal(todo:any) {
-    return this.http.post(API_URL+'/agregaranimal', todo);
+  addAnimal(animal:any) {
+    return this.http.post(API_URL+'/agregaranimal', animal);
   }
 
-  editarAnimal(todo:any){
-    return this.http.put(API_URL+'/modificaranimal', todo);
+  editarAnimal(animal:any){
+    return this.http.put(API_URL+'/modificaranimal', animal);
     
   }
 
   eliminarAnimal(id:any){
     return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id);
 
+  }
+
+  
+  addCita(cita:any) {
+    return this.http.post(API_URL+'/agregarcita', cita);
+  }
+
+
+
+  getUser(){
+    let headers = new HttpHeaders({
+      'Authorization':`Bearer ${localStorage.getItem('token')}`,
+      'Access-Control-Allow-Origin': 'http://localhost:8000',
+      'Access-Control-Allow-Credentials':'true',
+    });
+    let options = { headers: headers };    
+    return this.http.get(API_URL+'/user', options);
+    
+
+      
   }
 
 }

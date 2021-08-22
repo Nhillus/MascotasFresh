@@ -17,15 +17,15 @@ class CreateMedicoServicioAnimalsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('servicio_id');
             $table->unsignedBigInteger('animal_id');
-            $table->unsignedBigInteger('medico_id');
-            $table->dateTime('fecha',0);
+            $table->unsignedBigInteger('user_id');
+            $table->date('fecha');
             $table->string('estatus')->default("pendiente");
             $table->timestamps();
         });
         Schema::table('medico_servicio_animals',function (Blueprint $table){
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
-            $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('cascade');        
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');        
         });
     }
 

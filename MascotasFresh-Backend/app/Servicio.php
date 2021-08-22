@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Medico;
+use App\User;
 use App\Animal;
 
 class Servicio extends Model
@@ -74,8 +74,8 @@ class Servicio extends Model
         return $this->belongToMany(Animal::class, 'medico_servicio_animal');
     }
 
-    public function medicos() {
-        return $this->belongToMany(Medico::class, 'medico_servicio_animal');
+    public function users() {
+        return $this->belongToMany(User::class, 'medico_servicio_animal');
     }
 
 }

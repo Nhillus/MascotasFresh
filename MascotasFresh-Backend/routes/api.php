@@ -25,3 +25,6 @@ Route::delete('/eliminaranimal/{id}', 'AnimalController@destroy');
 /*----------------Rutas Usuario ---------------------------------*/
 Route::get('/user', 'UserController@user')->middleware('auth:api');
 Route::post('/registro', 'UserController@register');
+
+/////////////////////////////citas///////////////////////////////
+Route::post('/agregarcita', 'MedicoServicioAnimalController@store');
