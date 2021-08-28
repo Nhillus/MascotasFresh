@@ -15,17 +15,11 @@ const API_URL: string = 'http://localhost:8000/api';
 
 })
 
-
-
-
 export class ServiciosService {
   user:any;
  
   constructor(private http: HttpClient) { 
   }
-  
-  
-
 
   getAnimal() {
     return this.http.get(API_URL+'/animales');
@@ -45,13 +39,10 @@ export class ServiciosService {
     return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id);
 
   }
-
   
   addCita(cita:any) {
     return this.http.post(API_URL+'/agregarcita', cita);
   }
-
-
 
   getUser(){
     let headers = new HttpHeaders({
@@ -61,9 +52,10 @@ export class ServiciosService {
     });
     let options = { headers: headers };    
     return this.http.get(API_URL+'/user', options);
-    
+  }
 
-      
+  getServicios(){
+    return this.http.get(API_URL+'/serviciosDisponibles');
   }
 
 }

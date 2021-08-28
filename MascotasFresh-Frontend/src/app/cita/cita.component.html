@@ -5,17 +5,21 @@
 
         <div class="col-4">
             <form [formGroup]="FormCita" (ngSubmit)="addCita()">
-                <select style="margin-top: 10px;" class="form-select" aria-label="Default select example">
-                    <option selected>Servicios Disponibles</option>
-                    <option value="1">Vacunacion</option>
-                    <option value="2">Esterilizacion</option>
-                    <option value="3">Desparasitacion</option>
+                
+                <select formControlName="servicio_id" style="margin-top: 10px;" class="form-select" aria-label="Default select example" >
+                    <option  disabled>Servicios Disponibles</option>
+                    <option *ngFor="let servicio of serviciosdisponibles" [value]="servicio.id">{{servicio.nombre}} </option>
                   </select>
                         <app-datepicker-adapter (newItemEvent)="addItem($event)"></app-datepicker-adapter>
             
             </form>
+
         </div>
         <div class="col-4">
+            <p>
+                Today's item: {{idanimalcita}}
+              </p>
         </div>
     </div>
 </div>
+

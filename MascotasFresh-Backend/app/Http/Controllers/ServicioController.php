@@ -12,9 +12,10 @@ class ServicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $servicio = new Servicio;
+        $allServicios = $servicio->getAllservicios();
+        return ['servicios'=> $allServicios];
     }
 
     /**

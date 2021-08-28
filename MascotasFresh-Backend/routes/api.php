@@ -28,3 +28,4 @@ Route::post('/registro', 'UserController@register');
 
 /////////////////////////////citas///////////////////////////////
 Route::post('/agregarcita', 'MedicoServicioAnimalController@store');
+Route::get('/serviciosDisponibles','ServicioController@index');
