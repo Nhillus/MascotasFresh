@@ -52,7 +52,8 @@ export class AnimalComponent implements OnInit {
   getAnimales() {
     this.servicios
         .getAnimal().subscribe((data:any=[])=>{
-          this.animales = data.animales;              
+          this.animales = data.animales;  
+          console.log(this.animales);            
         })  
   }
       
@@ -91,6 +92,9 @@ export class AnimalComponent implements OnInit {
     seleccionado(animal:any){
       this.id_animal=animal;
       console.log(this.id_animal);
+    }
 
-}
+    getCitasAnimal(){
+
+    }
 }

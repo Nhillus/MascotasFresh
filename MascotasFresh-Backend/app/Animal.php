@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Cuidador;
 use App\User;
 use App\Servicio;
+use App\medico_servicion_animal;
 
 class Animal extends Model
 {
@@ -87,6 +88,17 @@ class Animal extends Model
 
     public function getAllAnimales() {
         $animales = Animal::all();
+        //Funcionalidad de ultimas citas
+        foreach ($animales as $animal) {
+            //
+            $citas =  DB::table('users')->join('medico_servicio_animals','users.id','=','medico_servicio_animals.user_id')
+                                        ->join('animals','medico_servicio_animals.animal_id','=','animals.id')
+                                        ->join('servicios','medico_servicio_animals.servicio_id','=','servicios.id')
+                                        ->where('animals.id','=',$animal->id)
+                                        ->select('users.name','users.email','animals.nombre as nombre del animal','servicios.nombre as nombre_del_servicio', 'medico_servicio_animals.fecha as fecha_de_la_cita')
+                                        ->orderby('fecha','desc')->take(3)->get();
+            $animal['citas']= $citas;
+        }
         return $animales; 
     }
 

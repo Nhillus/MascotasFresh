@@ -88,7 +88,14 @@
         <td>{{animal.nombre}}</td>
         <td>{{animal.nacimiento}}</td>
         <td>{{animal.esterilizado}}</td>
-        <td></td>
+        <td>
+          <li *ngFor="let cita of animal.citas"> 
+            <p >
+              {{ cita.nombre_del_servicio }} 
+              {{ cita.fecha_de_la_cita }}
+            </p>
+          </li>
+        </td>
         <td><div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Acciones
