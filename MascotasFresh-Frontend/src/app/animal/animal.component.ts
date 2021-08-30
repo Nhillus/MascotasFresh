@@ -14,6 +14,13 @@ import { Router } from '@angular/router';
 })
 export class AnimalComponent implements OnInit {
   items:string='';
+  campoEspecie:string;
+  campoRaza:string;
+  campoNombre:string;
+  campoNacimeiento:string;
+  raza:string;
+
+
 
   addItem(newItem: string) {
     this.items=newItem;
@@ -78,7 +85,6 @@ export class AnimalComponent implements OnInit {
           this.user = response 
           
       ),
-      
       err=> {
         localStorage.removeItem('token');
         this.router.navigate(['login']);
@@ -94,7 +100,14 @@ export class AnimalComponent implements OnInit {
       console.log(this.id_animal);
     }
 
-    getCitasAnimal(){
+    search(campo,escritura) {
+      if (this[escritura] != "") { 
+      this.animales = this.animales.filter(res => {
+        return res[campo].toLocaleLowerCase().match(this[escritura].toLocaleLowerCase());
+    })
+    } else if (this[escritura] == ""){
+      this.getAnimales();
+      } 
 
     }
 }

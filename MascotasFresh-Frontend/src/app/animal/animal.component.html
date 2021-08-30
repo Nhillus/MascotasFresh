@@ -60,23 +60,50 @@
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
   <div class="container">
     <div class="row">
-      <div class="col-2">
-        Espacio Reservado
-      </div>
-      <div class="col-10">
+      <div class="col-12">
       
 
 <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">especie</th>
-        <th scope="col">raza</th>
-        <th scope="col">nombre</th>
-        <th scope="col">nacimiento</th>
+        <th scope="col">
+          especie
+        </th>
+        <th scope="col">
+          raza
+        </th>
+        <th scope="col">
+          nombre
+        </th>
+        <th scope="col">
+          nacimiento
+        </th>
         <th scope="col">esterilizado</th>
         <th scope="col">Ultimas citas</th>
         <th scope="col">Acciones
+        </th>
+      </tr>
+      <tr>
+        <th>
+        </th>
+        <th>
+          <input name="especie" #inputEspecie [(ngModel)]="this.campoEspecie" (input)='search("especie","campoEspecie")' class="form-control me-2" type="search"  aria-label="Search">
+        </th>
+        <th>
+          <input name="raza" #inputEspecie [(ngModel)]="this.campoRaza" (input)='search("raza","campoRaza")' class="form-control me-2" type="search"  aria-label="Search">
+        </th>
+        <th>
+          <input name="nombre" #inputEspecie [(ngModel)]="this.campoNombre" (input)='search("nombre","campoNombre")' class="form-control me-2" type="search"  aria-label="Search">
+        </th>
+        <th>
+          <input name="nacimiento" #inputEspecie [(ngModel)]="this.campoNacimeiento" (input)='search("nacimiento","campoNacimeiento")' class="form-control me-2" type="search"  aria-label="Search">
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
         </th>
       </tr>
     </thead>

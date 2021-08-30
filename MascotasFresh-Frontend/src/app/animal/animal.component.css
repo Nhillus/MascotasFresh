@@ -4,3 +4,8 @@ td  li {
 td  li p{
     font-size: 10px;
 }
+input {
+    margin: 10px 0px 10px 0px;
+    width: 120px;
+    height: 30px;
+}
