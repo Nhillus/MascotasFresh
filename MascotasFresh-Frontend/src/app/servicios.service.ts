@@ -58,4 +58,11 @@ export class ServiciosService {
     return this.http.get(API_URL+'/serviciosDisponibles');
   }
 
+  getUsers() {
+    return this.http.get(API_URL+'/users');
+  }
+  addUsuario(user:any) {
+    return this.http.post(API_URL+'/newuser', user);
+  }
+
 }

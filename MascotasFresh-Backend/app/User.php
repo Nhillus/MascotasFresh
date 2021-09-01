@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 use App\Servicio;
 use App\Animal;
+use App\rol;
 
 use Laravel\Passport\HasApiTokens;
 
@@ -21,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','rol_id'
     ];
 
     /**
@@ -48,5 +49,8 @@ class User extends Authenticatable
 
     public function servicios() {
         return $this->belongsToMany(Servicio::class, 'medico_servicio_animal');
+    }
+    public function rol() {
+        return $this->belongTo(rol::class);
     }
 }

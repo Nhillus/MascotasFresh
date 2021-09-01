@@ -89,7 +89,8 @@ export class AnimalComponent implements OnInit {
         localStorage.removeItem('token');
         this.router.navigate(['login']);
       }
-     )}
+     )
+    }
 
 
      id_animal:number;

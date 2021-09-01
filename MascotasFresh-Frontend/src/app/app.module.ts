@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
 import { CitaComponent } from './cita/cita.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -29,6 +30,7 @@ import { CitaComponent } from './cita/cita.component';
     NavbarComponent,
     RegistroComponent,
     CitaComponent,
+    AdminComponent,
     
     
   ],

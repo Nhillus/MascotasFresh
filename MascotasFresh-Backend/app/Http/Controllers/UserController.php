@@ -11,19 +11,23 @@ class UserController extends Controller
 {
     //
     public function index() {
-        return User::all();
+        $allUsers = User::all();
+        return ['usuarios'=> $allUsers];        
     }
     public function user(Request $request) {
         
         return $request->user();
 
     }
-    public function register(UserRegisterRequest $request) {
-        User::create([
+    public function store(UserRegisterRequest $request) {
+        $usuario= User::create([
             'name'=> $request->name,
             'email'=> $request->email,
+            'rol_id'=> $request->rol_id,
             'password'=> Hash::make($request->password),
         ]);
-        return 'usuario creado';
+        return response()->json(["success"=>true, 
+                                 "message" =>'usuario creado', 
+                                 "usuario" => $usuario],200);
     }
 }

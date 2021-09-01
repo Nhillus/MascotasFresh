@@ -24,7 +24,9 @@ Route::put('/modificaranimal', 'AnimalController@update');
 Route::delete('/eliminaranimal/{id}', 'AnimalController@destroy');
 /*----------------Rutas Usuario ---------------------------------*/
 Route::get('/user', 'UserController@user')->middleware('auth:api');
-Route::post('/registro', 'UserController@register');
+//Route::post('/registro', 'UserController@register'); no usaremos el registro hasta que existan algunos usuarios fuera de la veterinaria
+Route::get('/users','UserController@index');
+Route::post('/newuser','UserController@store');
 
 /*----------------------------citas-------------------------------*/
 Route::post('/agregarcita', 'MedicoServicioAnimalController@store');

@@ -1,0 +1,106 @@
+
+  <app-navbar></app-navbar>
+  <hr>
+  <hr>
+  <div class="container">
+    <h3 >  Admin Nombre del admin</h3> <!-- use ?. porque no existe la plantilla en el animal ts, por eso uso la etiqueta que tendrias un comportamiento parecido al any, tambien una solucion seria usar nngIf como tambien deje en el codigo en el caso que no exista el usuario sabe que hacer y no lo rederiza-->
+    <div class="row">
+      <div class="col-10">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+          <i class="bi bi-plus">Nuevo Usuario</i>
+        </button>
+      </div>
+    </div>
+  </div>
+<!-- --------------------------------------------------formulariooooooooooooo para agregar nuevos usuarios  ------------------------------------------------>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm">
+
+          <div class="form-floating mb-3">
+            <input id="floatingEspecie" type="text" class="form-control" formControlName="name" placeholder="Especie">
+            <label for="floatingEspecie">Nombre</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingRaza" type="text" class="form-control" formControlName="email" placeholder="Raza">
+            <label for="floatingRaza">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingContraseña" type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+            <label for="floatingContraseña">Contraseña</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingPasswordConfirmation" type="password" class="form-control" formControlName="password_confirmation" placeholder="Confirmar Contraseña" >
+            <label for="inputPasswordConfirmation" >Confirmar Contraseña </label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingRol" type="text" class="form-control" formControlName="rol_id" placeholder="Rol">
+            <label for="floatingRol">Rol</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px;"  data-bs-dismiss="modal" aria-label="Close" (click)="saveUsuario()">Submit</button>
+        </form>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+      
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">
+          Nombre
+        </th>
+        <th scope="col">
+          Email
+        </th>
+        <th scope="col">
+          Rol
+        </th>
+        <th scope="col">Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of usuarios">
+      <tr>
+        <th scope="row">{{user.id}}</th>
+        <td> {{user.name}}  </td>
+        <td>{{user.email}}</td>
+        <td>{{user.rol_id}}</td>
+        <td><div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Acciones
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Editar Usuario</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar Usuario</a></li>
+          </ul>
+        </div></td>
+      </tr>
+  
+    </tbody>
+  </table>
+
+
+
+  </div>
+
