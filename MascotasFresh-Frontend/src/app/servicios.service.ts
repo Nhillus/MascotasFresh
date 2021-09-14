@@ -21,27 +21,34 @@ export class ServiciosService {
   constructor(private http: HttpClient) { 
   }
 
+  headers = new HttpHeaders({
+    'Authorization':`Bearer ${localStorage.getItem('token')}`,
+    'Access-Control-Allow-Origin':'http://localhost:8000',
+    'Access-Control-Allow-Credentials':'true',
+  });
+   options = { headers: this.headers };    
+
   getAnimal() {
-    return this.http.get(API_URL+'/animales');
+    return this.http.get(API_URL+'/animales',this.options);
   }
 
 
   addAnimal(animal:any) {
-    return this.http.post(API_URL+'/agregaranimal', animal);
+    return this.http.post(API_URL+'/agregaranimal', animal,this.options);
   }
 
   editarAnimal(animal:any){
-    return this.http.put(API_URL+'/modificaranimal', animal);
+    return this.http.put(API_URL+'/modificaranimal', animal,this.options);
     
   }
 
   eliminarAnimal(id:any){
-    return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id);
+    return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id,this.options);
 
   }
   
   addCita(cita:any) {
-    return this.http.post(API_URL+'/agregarcita', cita);
+    return this.http.post(API_URL+'/agregarcita', cita,this.options);
   }
 
   getUser(){
@@ -55,14 +62,14 @@ export class ServiciosService {
   }
 
   getServicios(){
-    return this.http.get(API_URL+'/serviciosDisponibles');
+    return this.http.get(API_URL+'/serviciosDisponibles',this.options);
   }
 
   getUsers() {
-    return this.http.get(API_URL+'/users');
+    return this.http.get(API_URL+'/users',this.options);
   }
   addUsuario(user:any) {
-    return this.http.post(API_URL+'/newuser', user);
+    return this.http.post(API_URL+'/newuser', user,this.options);
   }
 
 }
