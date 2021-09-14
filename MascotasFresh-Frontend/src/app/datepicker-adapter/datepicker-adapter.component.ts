@@ -1,4 +1,4 @@
-import {Component, Injectable, Input, Output,EventEmitter} from '@angular/core';
+import {Component, Injectable,Output,EventEmitter} from '@angular/core';
 import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 /**
@@ -66,26 +66,26 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 export class DatepickerAdapterComponent  {
   //@Input('saludo') value: string;
 
-  
- 
 
-  
-  // this method emits the value of newItemEvent
-   
+
+
+
+  // este meotod emita el value de newItemEvent, por medio de la variable var que es referenciada en el datepicker-adapter.component.html como this.var guardamos la fecha en
+  // en string y es enviada al padre(animal) por medio del nuevo evento emitido al darle submit, el submit es parte del html de datepicker
    var:string='';
    @Output() newItemEvent = new EventEmitter<string>();
 
    addNewItem() {
      this.newItemEvent.emit(this.var);
    }
- 
- 
+
+
 
 
   constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>) {}
 
   get today() {
-    
+
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 

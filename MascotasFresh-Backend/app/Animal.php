@@ -15,9 +15,9 @@ class Animal extends Model
     Protected $cast = ['esterilizado' => 'boolean'];
 
     public function Animal($request) {
-        
+
         $animal = new Animal;
-        
+
         $animal->especie = $request->especie;
         $animal->raza = $request->raza;
         $animal->nombre = $request->nombre;
@@ -27,8 +27,8 @@ class Animal extends Model
         if (!$animal) {
             return response()->json(["success"=>false, "message" =>'Registro de animal fallida'],500);
         }
-        return response()->json(["success"=>true, 
-                                 "message" =>'Registro de animal exitoso', 
+        return response()->json(["success"=>true,
+                                 "message" =>'Registro de animal exitoso',
                                  "animal" => $animal],201);
 
     }
@@ -37,8 +37,8 @@ class Animal extends Model
         if (!$animal) {
             return response()->json(["success"=>false, "message" =>'No se pudo enbcontrar el animal'],500);
         }
-        return response()->json(["success"=>true, 
-                                 "message" =>'Encontrado con exito el animal', 
+        return response()->json(["success"=>true,
+                                 "message" =>'Encontrado con exito el animal',
                                  "animal" => $animal],200);
     }
     /*public function verAnimal() {
@@ -51,22 +51,25 @@ class Animal extends Model
         if (!$animal) {
             return response()->json(["success"=>false, "message" =>'No se pudo encontrar el animal o no se pudo eliminar consultar con dev'],500);
         }
-        return response()->json(["success"=>true, 
-                                 "message" =>'Encontrado con exito la animal y Eliminado', 
+        return response()->json(["success"=>true,
+                                 "message" =>'Encontrado con exito la animal y Eliminado',
                                  "animal_Eliminado" => $animalEliminada,],200);
 
     }
 
-    public function modificarAnimal($id,$nombre) {
+    public function modificarAnimal($id,$request) {
         $animal = Animal::findOrFail($id);
-        $animalModificado = $animal->nombre; //luego esta linea se refactoriza
-        $animal->nombre = $nombre;
+        $animalModificado = $request->nombre; //luego esta linea se refactoriza
+        $animal->especie = $request->especie;
+        $animal->raza = $request->raza;
+        $animal->nombre = $request->nombre;
+        $animal->nacimiento = $request->nacimiento;
         $animal->save();
         if (!$animalModificado) {
             return response()->json(["success"=>false, "message" =>'No se pudo encontrar el animal o no se pudo modificar consultar con dev'],500);
         }
-        return response()->json(["success"=>true, 
-                                 "message" =>'Encontrado con exito el animal y modificado', 
+        return response()->json(["success"=>true,
+                                 "message" =>'Encontrado con exito el animal y modificado',
                                  "Animal_Previa_A_La_Modificacion" => $animalModificado,
                                  "Animal_Actual" => $animal],200);
 
@@ -75,13 +78,13 @@ class Animal extends Model
         $animal = Animal::findOrFail($id);
         $animalEstadoPrevio = $animal->esterilizado;
         $animal->esterilizado = !$animalEstadoPrevio;
-        $animal->save(); 
-        if ($animalEstadoPrevio == $animalAModificar)
+        $animal->save();
+        if ($animalEstadoPrevio == $estadoAModificar)
         {
             return response()->json(["success"=>false, "message" =>'No se pudo encontrar el anima o no se pudo modificar la esterilizacion consultar con dev'],500);
-        } 
-        return response()->json(["success"=>true, 
-                                 "message" =>'Encontrado con exito el animal y modificada su estado de esterilizacion', 
+        }
+        return response()->json(["success"=>true,
+                                 "message" =>'Encontrado con exito el animal y modificada su estado de esterilizacion',
                                  "Animal_Previa_A_La_Modificacion" => $animalEstadoPrevio,
                                  "Animal_Actual" => $animal],200);
     }
@@ -99,7 +102,7 @@ class Animal extends Model
                                         ->orderby('fecha','desc')->take(3)->get();
             $animal['citas']= $citas;
         }
-        return $animales; 
+        return $animales;
     }
 
     public function cuidadores() {

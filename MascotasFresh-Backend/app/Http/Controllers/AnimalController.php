@@ -25,7 +25,7 @@ class AnimalController extends Controller
     }
     public function update (Request $request) {
         $animal = new Animal;
-        $response = $animal->modificarAnimal($request->id,$request->nombre);
+        $response = $animal->modificarAnimal($request->id,$request);
         return $response;
     }
     public function destroy ($id) {
