@@ -25,8 +25,19 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        
+
         Passport::routes();
+
+        Passport::tokensCan([
+            'Admin' => 'Perfom any actions',
+            'Medico' => 'Add/Edit/Delete Animals',
+            'Asistente' => 'Add/Edit/Delete Products',
+            'basic' => 'read only Animals'
+        ]);
+
+        Passport::setDefaultScope([
+            'basic'
+        ]);
 
     }
 }

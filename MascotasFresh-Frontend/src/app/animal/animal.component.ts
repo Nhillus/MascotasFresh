@@ -60,6 +60,7 @@ export class AnimalComponent implements OnInit {
         .getAnimal().subscribe((data:any=[])=>{
           this.animales = data.animales;
           console.log(this.animales);
+          console.log(data);
         })
   }
 

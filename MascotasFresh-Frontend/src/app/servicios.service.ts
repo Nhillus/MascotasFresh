@@ -17,12 +17,18 @@ const API_URL: string = 'http://localhost:8000/api';
 
 export class ServiciosService {
   user:any;
+
+    headers = new HttpHeaders({
+      'Accept':'application/json',
+      'Authorization':`Bearer ${localStorage.getItem('token')}`,
+    });
+     options = { headers: this.headers }
  
   constructor(private http: HttpClient) { 
   }
 
   getAnimal() {
-    return this.http.get(API_URL+'/animales');
+    return this.http.get(API_URL+'/animales',this.options);
   }
 
 
