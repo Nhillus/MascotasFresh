@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         console.log('succes');
         console.log(response);                                      //Si la repuesta es correcta del servidor, guardamos en el localStorage el token para verificar que el usuario es el correcto con su token y autorizarlo en su recorrido por la aplicacion y lo enviamos a su consultorio en linea
         localStorage.setItem('token',response.access_token);
-        //this.router.navigate(['/animal'])
+        this.router.navigate(['/animal'])
       },
       error => {                                                    //Si no devuelve un error.
         console.log('error');

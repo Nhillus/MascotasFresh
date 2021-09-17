@@ -59,10 +59,19 @@ export class ServiciosService {
   }
 
   getUsers() {
-    return this.http.get(API_URL+'/users',this.options);
+    return this.http.get(API_URL+'/users', this.options);
   }
+
   addUsuario(user:any) {
-    return this.http.post(API_URL+'/newuser', user,this.options);
+    return this.http.post(API_URL+'/newuser', user, this.options);
+  }
+
+  editarUsuario(usuario:any) {
+    return this.http.put(API_URL+'/modificaruser', usuario, this.options);
+  }
+
+  eliminarUsuario(id:any) {
+    return this.http.delete(API_URL+'/eliminaruser'+'/'+id, this.options);
   }
 
 }

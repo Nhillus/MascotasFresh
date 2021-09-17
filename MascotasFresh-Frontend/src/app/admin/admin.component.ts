@@ -4,8 +4,6 @@ import { FormBuilder,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
-
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -30,6 +28,9 @@ export class AdminComponent implements OnInit {
     name:any,
     email:any,
   };
+
+  animaless: Array<any> = [];
+  usuarioseleccionado:any;
 
   usuarios:any=[];
 
@@ -67,5 +68,36 @@ export class AdminComponent implements OnInit {
           this.getUsuarios();
         });
   }
-
+  usuarioSeleccionado(usuario:any){
+    console.log(usuario);
+    this.usuarioseleccionado = usuario;
+  }
+  updateUsuario() {
+    console.log(this.usuarioseleccionado)
+    this.servicios
+        .editarUsuario(this.usuarioseleccionado)
+        .subscribe((response) => {
+          this.usuarios.map(x => {
+            if(x.id == this.usuarioseleccionado.id){
+              x = this.usuarioseleccionado;
+            }
+          });
+          alert(JSON.stringify(response))
+          this.getUsuarios();
+        }
+        , (error) => {
+          let errMsg = "Update Fail ! Error = " + error;
+        });
+  }
+  deleteUsusario(usuario) {
+    console.log(this.usuarioseleccionado)
+    this.usuarioSeleccionado(usuario)
+    console.log(this.usuarioseleccionado)
+      this.servicios
+          .eliminarUsuario(this.usuarioseleccionado.id)
+          .subscribe((response:any)=>{
+            alert(JSON.stringify(response))
+            this.getUsuarios();
+          });
+   }
 }
