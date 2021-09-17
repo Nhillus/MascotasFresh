@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 
-
-
-
-
-
 const API_URL: string = 'http://localhost:8000/api';
-
 @Injectable({
   providedIn: 'root',
   
@@ -33,21 +27,21 @@ export class ServiciosService {
 
 
   addAnimal(animal:any) {
-    return this.http.post(API_URL+'/agregaranimal', animal);
+    return this.http.post(API_URL+'/agregaranimal', animal,this.options);
   }
 
   editarAnimal(animal:any){
-    return this.http.put(API_URL+'/modificaranimal', animal);
+    return this.http.put(API_URL+'/modificaranimal', animal,this.options);
     
   }
 
   eliminarAnimal(id:any){
-    return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id);
+    return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id,this.options);
 
   }
   
   addCita(cita:any) {
-    return this.http.post(API_URL+'/agregarcita', cita);
+    return this.http.post(API_URL+'/agregarcita', cita,this.options);
   }
 
   getUser(){
@@ -61,14 +55,14 @@ export class ServiciosService {
   }
 
   getServicios(){
-    return this.http.get(API_URL+'/serviciosDisponibles');
+    return this.http.get(API_URL+'/serviciosDisponibles',this.options);
   }
 
   getUsers() {
-    return this.http.get(API_URL+'/users');
+    return this.http.get(API_URL+'/users',this.options);
   }
   addUsuario(user:any) {
-    return this.http.post(API_URL+'/newuser', user);
+    return this.http.post(API_URL+'/newuser', user,this.options);
   }
 
 }
