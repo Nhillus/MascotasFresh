@@ -31,12 +31,16 @@ export class AdminComponent implements OnInit {
 
   animaless: Array<any> = [];
   usuarioseleccionado:any;
+  rolseleccionado:number=0;
+  rolesdisponibles:any=[];
+
 
   usuarios:any=[];
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.getUser();
     this.getUsuarios();
+    this.getRoles();
 
   }
 
@@ -100,4 +104,12 @@ export class AdminComponent implements OnInit {
             this.getUsuarios();
           });
    }
+
+   getRoles() {
+    this.servicios
+        .conseguirroles().subscribe((data:any=[])=>{
+          this.rolesdisponibles = data.roles;
+          console.log(this.rolesdisponibles)              
+        })  
+  }
 }

@@ -73,5 +73,8 @@ export class ServiciosService {
   eliminarUsuario(id:any) {
     return this.http.delete(API_URL+'/eliminaruser'+'/'+id, this.options);
   }
+  conseguirroles() {
+    return this.http.get(API_URL+'/rolesavaliable',this.options);
+  }
 
 }

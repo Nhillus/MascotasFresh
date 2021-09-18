@@ -37,6 +37,7 @@ Route::middleware(['auth:api','rol'])->group(function() {
     Route::middleware(['scope:Admin'])->post('/newuser','UserController@store');
     Route::middleware(['scope:Admin'])->put('/modificaruser','UserController@update');
     Route::middleware(['scope:Admin'])->delete('eliminaruser/{id}','UserController@delete');
+    Route::middleware(['scope:Admin'])->get('/rolesavaliable','UserController@indexRoles');
 
 });
 // lo que pasa es lo que explican en laracast que el token se crea al pedir la peticion y ese metodo de checkrole tengo que hacerlo en la aplicacion

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\rol;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
@@ -14,7 +15,12 @@ class UserController extends Controller
     //
     public function index() {
         $allUsers = User::all();
-        return ['usuarios'=> $allUsers];        
+        foreach ($allUsers as $user) {
+            $userRol = $user->rol()->first();
+            $user->rol_id = $userRol->nombre_rol;
+        }
+        return ['usuarios'=> $allUsers];
+
     }
     public function user(Request $request) {
         
@@ -40,7 +46,7 @@ class UserController extends Controller
            return response()->json([
                 'message' => 'User not found.',
                 $e
-            ], 403);
+            ], 404);
         }
         $usuario->update($request->all());
 
@@ -55,11 +61,23 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'User not found.',
                 $e
-            ], 403);
+            ], 404);
         }
         $usuario->delete();
     
         return response()->json(['message'=>'Usuario Eliminado.']);
 
+    }
+
+    public function indexRoles() {
+        try {
+            $roles = rol::all();
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Roles no conseguidos problema en el servidor.',
+                $e
+            ], 404);
+        }
+        return ['roles'=> $roles]; 
     }
 }
