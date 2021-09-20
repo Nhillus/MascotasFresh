@@ -11,14 +11,14 @@ const API_URL: string = 'http://localhost:8000/api';
 
 @Injectable({
   providedIn: 'root',
-  
+
 
 })
 
 export class ServiciosService {
   user:any;
- 
-  constructor(private http: HttpClient) { 
+
+  constructor(private http: HttpClient) {
   }
 
   getAnimal() {
@@ -32,14 +32,14 @@ export class ServiciosService {
 
   editarAnimal(animal:any){
     return this.http.put(API_URL+'/modificaranimal', animal);
-    
+
   }
 
   eliminarAnimal(id:any){
     return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id);
 
   }
-  
+
   addCita(cita:any) {
     return this.http.post(API_URL+'/agregarcita', cita);
   }
@@ -50,7 +50,7 @@ export class ServiciosService {
       'Access-Control-Allow-Origin': 'http://localhost:8000',
       'Access-Control-Allow-Credentials':'true',
     });
-    let options = { headers: headers };    
+    let options = { headers: headers };
     return this.http.get(API_URL+'/user', options);
   }
 
@@ -64,5 +64,16 @@ export class ServiciosService {
   addUsuario(user:any) {
     return this.http.post(API_URL+'/newuser', user);
   }
-
+  getProductos() {
+    return this.http.get(API_URL+'/products');
+  }
+  addProducto(producto:any) {
+    return this.http.post(API_URL+'/newproducto', producto);
+  }
+  editarProducto(producto:any) {
+    return this.http.put(API_URL+'/updateproducto', producto);
+  }
+  eliminarProducto(id:any) {
+    return this.http.delete(API_URL+'/deleteproducto'+'/'+id);
+  }
 }

@@ -27,6 +27,11 @@ Route::get('/user', 'UserController@user')->middleware('auth:api');
 //Route::post('/registro', 'UserController@register'); no usaremos el registro hasta que existan algunos usuarios fuera de la veterinaria
 Route::get('/users','UserController@index');
 Route::post('/newuser','UserController@store');
+/*-----------------Rutas Productos-----------------------*/
+Route::get('/products','ProductoController@index');
+Route::post('/newproducto','ProductoController@store');
+Route::put('/updateproducto','ProductoController@update');
+Route::delete('/deleteproducto/{id}','ProductoController@destroy');
 
 /*----------------------------citas-------------------------------*/
 Route::post('/agregarcita', 'MedicoServicioAnimalController@store');
