@@ -13,16 +13,16 @@ class RolTableSeeder extends Seeder
     public function run()
     {
         //
-        $roles = 
-        [   
+        $roles =
+        [
             [
                 'nombre_rol'=> 'Admin',
-                'descripcion'=> 'Tiene acceso a todas las vistas y rutas del sistema.', 
+                'descripcion'=> 'Tiene acceso a todas las vistas y rutas del sistema.',
             ],[
                 'nombre_rol'=> 'Medico',
                 'descripcion'=> 'Tiene acceso a su consultorio virtual y la info de sus pacientes.'
             ],[
-                'nombre_rol'=> 'Asistente Producto',
+                'nombre_rol'=> 'Asistente',
                 'descripcion'=> 'Tiene  acceso a todo lo relacionado con los productos.'
             ]
         ];

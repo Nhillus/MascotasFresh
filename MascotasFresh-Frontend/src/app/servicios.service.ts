@@ -77,15 +77,15 @@ export class ServiciosService {
     return this.http.get(API_URL+'/rolesavaliable',this.options);
   }
   getProductos() {
-    return this.http.get(API_URL+'/products');
+    return this.http.get(API_URL+'/products',this.options);
   }
   addProducto(producto:any) {
-    return this.http.post(API_URL+'/newproducto', producto);
+    return this.http.post(API_URL+'/newproducto', producto,this.options);
   }
   editarProducto(producto:any) {
-    return this.http.put(API_URL+'/updateproducto', producto);
+    return this.http.put(API_URL+'/updateproducto', producto,this.options);
   }
   eliminarProducto(id:any) {
-    return this.http.delete(API_URL+'/deleteproducto'+'/'+id);
+    return this.http.delete(API_URL+'/deleteproducto'+'/'+id,this.options);
   }
 }
