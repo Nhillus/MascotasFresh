@@ -3,6 +3,8 @@ import { ServiciosService } from '../servicios.service';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Product } from '../product';
+import { User} from '../user';
 
 
 @Component({
@@ -16,11 +18,11 @@ export class ProductComponent implements OnInit {
   campoCantidad:string;
   campoPrecio:string;
   campoLote:string;
-  campoCreato:string;
+  campoCreado:string;
   campoVencimiento:string;
   raza:string;
-  productoseleccionado:any;
-  productos: Array<any> = [];
+  productoseleccionado:Product;
+  productos: Array<Product> = [];
 
   checkoutForm = this.formBuilder.group({
     nombre: '',
@@ -33,15 +35,10 @@ export class ProductComponent implements OnInit {
 
   animales:any=[];
 
-  user: {
-    id:any,
-    name:any,
-    email:any,
-  };
+  user:User;
 
   constructor(private servicios:ServiciosService,
               private formBuilder: FormBuilder,
-              private http: HttpClient,
               private router:Router,
             ) {
   }
@@ -53,13 +50,13 @@ export class ProductComponent implements OnInit {
 
   getProductos() {
     this.servicios
-        .getProductos().subscribe((data:any=[])=>{
+        .getProductos().subscribe((data:any=[Product])=>{
           this.productos = data.productos;
           console.log(this.productos);
         })
   }
 
-  productoSeleccionado(producto:any){
+  productoSeleccionado(producto:Product){
     this.productoseleccionado = producto;
     console.log(this.productoseleccionado);
   }
@@ -69,7 +66,7 @@ export class ProductComponent implements OnInit {
     this.productoSeleccionado(producto)
     this.servicios
         .eliminarProducto(this.productoseleccionado.id)
-        .subscribe((response:any)=>{
+        .subscribe((response:JSON)=>{
           alert(JSON.stringify(response))
           this.getProductos();
         });
@@ -95,7 +92,7 @@ export class ProductComponent implements OnInit {
 
   addProducto(): void{
     console.log(this.checkoutForm.getRawValue());
-    this.servicios.addProducto(this.checkoutForm.value).subscribe((response:any)=>{   //Llamo al servicio servicios con su metodo addAnimal el cual tiene toda la logica para enviar el http post al backend con su url y headder
+    this.servicios.addProducto(this.checkoutForm.value).subscribe((response:JSON)=>{   //Llamo al servicio servicios con su metodo addAnimal el cual tiene toda la logica para enviar el http post al backend con su url y headder
       alert(JSON.stringify(response))
       this.getProductos();                                                   //llamo al metodo para actualizar la lista de animales desde el backend, tambien se podria hacer con los datos que tenemos en el formulario de animal
     });
@@ -124,7 +121,7 @@ export class ProductComponent implements OnInit {
 
     search(campo,escritura) {                                                               //Este metodo hace una busqueda separada por campo entre los 4 campos del html(Especie,Raza,Nombre,Animal), lo hace
       if (this[escritura] != "") {                                                          //pasando el valor del campo que se esta buscando, con la "escritura" que es enviado dependiendo donde se escriba,
-        this.animales = this.animales.filter(res => {                                         //la "escritura" es basicamente el nombre del campo esto se conoce como programacion funcional
+        this.productos = this.productos.filter(res => {                                         //la "escritura" es basicamente el nombre del campo esto se conoce como programacion funcional
         return res[campo].toLocaleLowerCase().match(this[escritura].toLocaleLowerCase());
       })
       } else if (this[escritura] == ""){

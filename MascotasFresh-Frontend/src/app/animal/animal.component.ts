@@ -5,7 +5,8 @@ import { DatepickerAdapterComponent } from '../datepicker-adapter/datepicker-ada
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
-
+import { Animal } from '../animal';
+import { User } from '../user';
 
 @Component({
   selector: 'app-animal',
@@ -19,8 +20,8 @@ export class AnimalComponent implements OnInit {
   campoNombre:string;
   campoNacimeiento:string;
   raza:string;
-  animalseleccionado:any;
-  animaless: Array<any> = [];
+  animalseleccionado:Animal;
+  animaless: Array<Animal> = [];
 
   addItem(newItem: string) {
     this.items=newItem;      //output que recibo del hijo hacia el padre (animal.component.ts)
@@ -34,13 +35,9 @@ export class AnimalComponent implements OnInit {
     nacimiento: this.items,
     esterilizado:0 ,
   });
-  animales:any=[];
+  animales:any=[Animal];
 
-  user: {
-    id:any,
-    name:any,
-    email:any,
-  };
+  user: User;
 
   constructor(private servicios:ServiciosService,
               private formBuilder: FormBuilder,
@@ -57,13 +54,13 @@ export class AnimalComponent implements OnInit {
 
   getAnimales() {
     this.servicios
-        .getAnimal().subscribe((data:any=[])=>{
+        .getAnimal().subscribe((data:any=[Animal])=>{
           this.animales = data.animales;
           console.log(this.animales);
         })
   }
 
-  animalSeleccionado(anis:any){
+  animalSeleccionado(anis:Animal){
     this.animalseleccionado = anis;
   }
 
@@ -72,7 +69,7 @@ export class AnimalComponent implements OnInit {
     this.animalSeleccionado(animal)
     this.servicios
         .eliminarAnimal(this.animalseleccionado.id)
-        .subscribe((response:any)=>{
+        .subscribe((response:Animal)=>{
           alert(JSON.stringify(response))
           this.getAnimales();
         });
@@ -125,7 +122,7 @@ export class AnimalComponent implements OnInit {
 
      id_animal:number;
 
-    seleccionado(animal:any){
+    seleccionado(animal:number){
       this.id_animal=animal;
       console.log(this.id_animal);
     }
