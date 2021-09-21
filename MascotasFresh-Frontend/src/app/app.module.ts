@@ -14,9 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
 import { CitaComponent } from './cita/cita.component';
 import { AdminComponent } from './admin/admin.component';
-
-
-
+import { ProductComponent } from './product/product.component';
 
 
 
@@ -31,8 +29,9 @@ import { AdminComponent } from './admin/admin.component';
     RegistroComponent,
     CitaComponent,
     AdminComponent,
-    
-    
+    ProductComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -41,9 +40,9 @@ import { AdminComponent } from './admin/admin.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    
-    
-  
+
+
+
   ],
   exports: [AnimalComponent,DatepickerAdapterComponent],
   providers: [ ],

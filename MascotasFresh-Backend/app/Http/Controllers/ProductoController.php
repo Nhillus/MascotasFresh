@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Producto;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -14,7 +15,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $allProducts = Producto::all();
+        return ['productos'=> $allProducts];
     }
 
     /**
@@ -22,9 +24,9 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -36,6 +38,17 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $producto= Producto::create([
+            'nombre'=> $request->nombre,
+            'cantidad'=> $request->cantidad,
+            'precio'=> $request->precio,
+            'lote'=> $request->lote,
+            'creado'=> $request->creado,
+            'vencimiento' => $request->vencimiento,
+        ]);
+        return response()->json(["success"=>true,
+                                 "message" =>'producto creado',
+                                 "usuario" => $producto],200);
     }
 
     /**
@@ -69,7 +82,17 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        try {
+            $user = Producto::findOrFail($request->id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Producto no conseguido.'
+            ], 403);
+        }
+
+        $user->update($request->all());
+
+        return response()->json(['message'=>'Producto actualizado']);
     }
 
     /**
@@ -78,8 +101,19 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(Request $request)
     {
         //
+        try {
+            $product = Producto::findOrFail($request->id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => ' No se consigue producto para eleminar.'
+            ], 403);
+        }
+
+        $product->delete();
+
+        return response()->json(['message'=>'Producto Eliminado.']);
     }
 }

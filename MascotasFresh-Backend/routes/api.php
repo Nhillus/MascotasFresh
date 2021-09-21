@@ -39,6 +39,12 @@ Route::middleware(['auth:api','rol'])->group(function() {
     Route::middleware(['scope:Admin'])->delete('eliminaruser/{id}','UserController@delete');
     Route::middleware(['scope:Admin'])->get('/rolesavaliable','UserController@indexRoles');
 
+    /*-----------------Rutas Productos-----------------------*/
+    Route::middleware(['scope:Admin,Asistente'])->get('/products','ProductoController@index');
+    Route::middleware(['scope:Admin,Asistente'])->post('/newproducto','ProductoController@store');
+    Route::middleware(['scope:Admin,Asistente'])->put('/updateproducto','ProductoController@update');
+    Route::middleware(['scope:Admin,Asistente'])->delete('/deleteproducto/{id}','ProductoController@destroy');
+
 });
 // lo que pasa es lo que explican en laracast que el token se crea al pedir la peticion y ese metodo de checkrole tengo que hacerlo en la aplicacion
 // nota dia despues: consegui una mejor forma enviar la peticion a un controlador propio mio que le agrege a la request el scope del usuario, dependiendo su rol
@@ -47,3 +53,11 @@ Route::middleware(['auth:api','rol'])->group(function() {
 
 
 
+//Route::post('/registro', 'UserController@register'); no usaremos el registro hasta que existan algunos usuarios fuera de la veterinaria
+//Route::get('/users','UserController@index');
+//Route::post('/newuser','UserController@store');
+
+
+/*----------------------------citas-------------------------------*/
+//Route::post('/agregarcita', 'MedicoServicioAnimalController@store');
+//Route::get('/serviciosDisponibles','ServicioController@index');

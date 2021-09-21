@@ -5,7 +5,7 @@ import { FormBuilder } from '@angular/forms';
 const API_URL: string = 'http://localhost:8000/api';
 @Injectable({
   providedIn: 'root',
-  
+
 
 })
 
@@ -17,8 +17,8 @@ export class ServiciosService {
       'Authorization':`Bearer ${localStorage.getItem('token')}`,
     });
      options = { headers: this.headers }
- 
-  constructor(private http: HttpClient) { 
+
+  constructor(private http: HttpClient) {
   }
 
   getAnimal() {
@@ -32,14 +32,14 @@ export class ServiciosService {
 
   editarAnimal(animal:any){
     return this.http.put(API_URL+'/modificaranimal', animal,this.options);
-    
+
   }
 
   eliminarAnimal(id:any){
     return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id,this.options);
 
   }
-  
+
   addCita(cita:any) {
     return this.http.post(API_URL+'/agregarcita', cita,this.options);
   }
@@ -50,7 +50,7 @@ export class ServiciosService {
       'Access-Control-Allow-Origin': 'http://localhost:8000',
       'Access-Control-Allow-Credentials':'true',
     });
-    let options = { headers: headers };    
+    let options = { headers: headers };
     return this.http.get(API_URL+'/user', options);
   }
 
@@ -76,5 +76,16 @@ export class ServiciosService {
   conseguirroles() {
     return this.http.get(API_URL+'/rolesavaliable',this.options);
   }
-
+  getProductos() {
+    return this.http.get(API_URL+'/products');
+  }
+  addProducto(producto:any) {
+    return this.http.post(API_URL+'/newproducto', producto);
+  }
+  editarProducto(producto:any) {
+    return this.http.put(API_URL+'/updateproducto', producto);
+  }
+  eliminarProducto(id:any) {
+    return this.http.delete(API_URL+'/deleteproducto'+'/'+id);
+  }
 }
