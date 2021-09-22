@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       password: formData.password,          //En este caso por la palabra password, esta peticion es una de la mas simples con la contraseña que el usuario a dado pedimos al
       grant_type:'password',                //Servidor un intercambio un token de acceso por la contraseña,con el cliente_id identificamos la aplicacion que esta asociada al backend
       client_id: '2',                       //Como la aplicacion cliente es nuestra podemos colocar el client_secret en el caso de que fuera de 3eros deberiamos usar algun tipo de intercambio
-      client_secret:'GADO8s5bg4aXI8mDnxXy9irWai8TKxsK4iiezGOm',       //Tal vez usando claves privadas con publicas (Nota para mi: recuerda seguridad wilmer claves privadas publicas)
+      client_secret:'3KQ3n64wqyG6W1rHxDT0TNJPe8PwE9hkTezGavlo',       //Tal vez usando claves privadas con publicas (Nota para mi: recuerda seguridad wilmer claves privadas publicas)
     };
     let headers = new HttpHeaders({                                 //Aqui creamos un objecto Httpheaders el cual funciona la forma mas simple de explicarlo es como si de etiquetas en el correo
       'Access-Control-Allow-Origin': 'http://localhost:8000',       //Se trataran, Enviamos el access-controll el cual dice a que dirrecion va el paquete y que permita acceso por medio de credenciales
