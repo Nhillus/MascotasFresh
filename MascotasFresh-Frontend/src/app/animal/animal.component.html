@@ -1,144 +1,201 @@
 
-  <app-navbar></app-navbar>
-  <hr>
-  <hr>
-  <div class="container">
-    <h3 *ngIf="user">  Hola Doctor {{this.user?.name}}</h3> <!-- use ?. porque no existe la plantilla en el animal ts, por eso uso la etiqueta que tendrias un comportamiento parecido al any, tambien una solucion seria usar nngIf como tambien deje en el codigo en el caso que no exista el usuario sabe que hacer y no lo rederiza-->
-    <div class="row">
-      <div class="col-10">
+
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Mascotas Fresh</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <a class="nav-link px-3" href="#">Sign out</a>
       </div>
-      <div class="col-2">
-        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-          <i class="bi bi-plus">Nuevo Peludo</i>
-        </button>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-lg-2 ">
+        <app-sidebar></app-sidebar>
       </div>
     </div>
   </div>
-<!-- --------------------------------------------------formulario para agregar nuevos animalesss (pacientes) ------------------------------------------------>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <hr>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="container">
+      <h3 *ngIf="user">  Hola Doctor {{this.user?.name}}</h3> <!-- use ?. porque no existe la plantilla en el animal ts, por eso uso la etiqueta que tendrias un comportamiento parecido al any, tambien una solucion seria usar nngIf como tambien deje en el codigo en el caso que no exista el usuario sabe que hacer y no lo rederiza-->
+      <div class="row">
+        <div class="col-10">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+            <i class="bi bi-plus">Nuevo Peludo</i>
+          </button>
+        </div>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="checkoutForm" (ngSubmit)="addAnimal()">
-
-          <div class="form-floating mb-3">
-            <input id="floatingEspecie" type="text" class="form-control" formControlName="especie" placeholder="Especie">
-            <label for="floatingEspecie">Especie</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingRaza" type="text" class="form-control" formControlName="raza" placeholder="Raza">
-            <label for="floatingRaza">Raza</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingNombre" type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-            <label for="floatingNombre">Nombre</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" formControlName="esterilizado"  id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <!---Etiqueta datepicker-->
-          <div class="form-floating mb-3">
-              <app-datepicker-adapter (newItemEvent)="addItem($event)"></app-datepicker-adapter>    <!-- Aqui paso desde -->
-          </div>
-        </form>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">
+                  especie
+                </th>
+                <th scope="col">
+                  raza
+                </th>
+                <th scope="col">
+                  nombre
+                </th>
+                <th scope="col">
+                  nacimiento
+                </th>
+                <th scope="col">esterilizado</th>
+                <th scope="col">Ultimas citas</th>
+                <th scope="col">Acciones
+                </th>
+              </tr>
+              <tr>
+                <th>
+                </th>
+                <th>
+                  <input name="especie" #inputEspecie [(ngModel)]="this.campoEspecie" (input)='search("especie","campoEspecie")' class="form-control me-2" type="search"  aria-label="Search">
+                </th>
+                <th>
+                  <input name="raza" #inputRaza [(ngModel)]="this.campoRaza" (input)='search("raza","campoRaza")' class="form-control me-2" type="search"  aria-label="Search">
+                </th>
+                <th>
+                  <input name="nombre" #inputNombre [(ngModel)]="this.campoNombre" (input)='search("nombre","campoNombre")' class="form-control me-2" type="search"  aria-label="Search">
+                </th>
+                <th>
+                  <input name="nacimiento" #inputNacimiento [(ngModel)]="this.campoNacimeiento" (input)='search("nacimiento","campoNacimeiento")' class="form-control me-2" type="search"  aria-label="Search">
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let animal of animales">
+              <tr>
+                <th scope="row">{{animal.id}}</th>
+                <td> {{animal.especie}}  </td>
+                <td>{{animal.raza}}</td>
+                <td>{{animal.nombre}}</td>
+                <td>{{animal.nacimiento}}</td>
+                <td>{{animal.esterilizado}}</td>
+                <td>
+                  <li *ngFor="let cita of animal.citas">  <!--- La razon porque tengo citas en el modelo animal es que en el backend agregue un campo citas dentro de la colletion animal y aqui la recorro por cada animal----->
+                    <p >                                  <!--- Maximo tengo 3 citas en orden descendientes-->
+                      {{ cita.nombre_del_servicio }}
+                      {{ cita.fecha_de_la_cita }}
+                    </p>
+                  </li>
+                </td>
+                <td><div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Acciones
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" (click)="seleccionado(animal.id)" data-bs-toggle="modal" data-bs-target="#Modalcita" >Nueva Cita </a></li>
+                    <li><a class="dropdown-item" href="#">Historia Medica</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateTodo-modal" (click)="animalSeleccionado(animal)" >Editar Paciente</a></li>
+                    <li><a class="dropdown-item" (click)="eliminarAnimal(animal)" >Eliminar Paciente</a></li>
+                  </ul>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+    <!-- Modal -->
+  <div class="modal fade" id="updateTodo-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h3>Editar</h3>
+            <div *ngIf="animalseleccionado">
+              <form  (ngSubmit)="modificarAnimal()" >
+                  <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input type="numer" class="form-control"
+                              id="id" required [(ngModel)]="animalseleccionado.id" name="id" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre">especie</label>
+                    <input type="text" class="form-control" placeholder="especie"
+                              id="especie" required [(ngModel)]="animalseleccionado.especie" name="especie">
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre">raza</label>
+                    <input type="text" class="form-control" placeholder="raza"
+                              id="raza" required [(ngModel)]="animalseleccionado.raza" name="raza">
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre">nombre</label>
+                    <input type="text" class="form-control" placeholder="nombre"
+                              id="nombre" required [(ngModel)]="animalseleccionado.nombre" name="nombre">
+                  </div>
+                  <div class="form-floating mb-3">
+                    <app-datepicker-adapter (newItemEvent)="addItem($event)"></app-datepicker-adapter>    <!-- Aqui paso desde -->
+                </div>
+              </form>
+            </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+    <!-- --------------------------------------------------formulario para agregar nuevos animalesss (pacientes) ------------------------------------------------>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="checkoutForm" (ngSubmit)="addAnimal()">
 
-
-
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-
-
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">
-          especie
-        </th>
-        <th scope="col">
-          raza
-        </th>
-        <th scope="col">
-          nombre
-        </th>
-        <th scope="col">
-          nacimiento
-        </th>
-        <th scope="col">esterilizado</th>
-        <th scope="col">Ultimas citas</th>
-        <th scope="col">Acciones
-        </th>
-      </tr>
-      <tr>
-        <th>
-        </th>
-        <th>
-          <input name="especie" #inputEspecie [(ngModel)]="this.campoEspecie" (input)='search("especie","campoEspecie")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="raza" #inputRaza [(ngModel)]="this.campoRaza" (input)='search("raza","campoRaza")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="nombre" #inputNombre [(ngModel)]="this.campoNombre" (input)='search("nombre","campoNombre")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="nacimiento" #inputNacimiento [(ngModel)]="this.campoNacimeiento" (input)='search("nacimiento","campoNacimeiento")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-        </th>
-        <th>
-        </th>
-        <th>
-        </th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let animal of animales">
-      <tr>
-        <th scope="row">{{animal.id}}</th>
-        <td> {{animal.especie}}  </td>
-        <td>{{animal.raza}}</td>
-        <td>{{animal.nombre}}</td>
-        <td>{{animal.nacimiento}}</td>
-        <td>{{animal.esterilizado}}</td>
-        <td>
-          <li *ngFor="let cita of animal.citas">  <!--- La razon porque tengo citas en el modelo animal es que en el backend agregue un campo citas dentro de la colletion animal y aqui la recorro por cada animal----->
-            <p >                                  <!--- Maximo tengo 3 citas en orden descendientes-->
-              {{ cita.nombre_del_servicio }}
-              {{ cita.fecha_de_la_cita }}
-            </p>
-          </li>
-        </td>
-        <td><div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Acciones
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" (click)="seleccionado(animal.id)" data-bs-toggle="modal" data-bs-target="#Modalcita" >Nueva Cita </a></li>
-            <li><a class="dropdown-item" href="#">Historia Medica</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateTodo-modal" (click)="animalSeleccionado(animal)" >Editar Paciente</a></li>
-            <li><a class="dropdown-item" (click)="eliminarAnimal(animal)" >Eliminar Paciente</a></li>
-          </ul>
-        </div></td>
-      </tr>
-
-    </tbody>
-  </table>
-
-
+            <div class="form-floating mb-3">
+              <input id="floatingEspecie" type="text" class="form-control" formControlName="especie" placeholder="Especie">
+              <label for="floatingEspecie">Especie</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input id="floatingRaza" type="text" class="form-control" formControlName="raza" placeholder="Raza">
+              <label for="floatingRaza">Raza</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input id="floatingNombre" type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+              <label for="floatingNombre">Nombre</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" formControlName="esterilizado"  id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Default checkbox
+              </label>
+            </div>
+            <!---Etiqueta datepicker-->
+            <div class="form-floating mb-3">
+                <app-datepicker-adapter (newItemEvent)="addItem($event)"></app-datepicker-adapter>    <!-- Aqui paso desde -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
   <div class="modal fade" id="Modalcita" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -148,63 +205,17 @@
         </div>
         <div class="modal-body">
           <form>
-
             <app-cita [idanimalcita]="id_animal" ></app-cita>
-
           </form>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
         </div>
       </div>
     </div>
   </div>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 
 
-
-
-  <!-- Modal -->
-<div class="modal fade" id="updateTodo-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <h3>Editar</h3>
-          <div *ngIf="animalseleccionado">
-            <form  (ngSubmit)="modificarAnimal()" >
-                <div class="form-group">
-                  <label for="id">Id:</label>
-                  <input type="numer" class="form-control"
-                            id="id" required [(ngModel)]="animalseleccionado.id" name="id" disabled>
-                </div>
-                <div class="form-group">
-                  <label for="nombre">especie</label>
-                  <input type="text" class="form-control" placeholder="especie"
-                            id="especie" required [(ngModel)]="animalseleccionado.especie" name="especie">
-                </div>
-                <div class="form-group">
-                  <label for="nombre">raza</label>
-                  <input type="text" class="form-control" placeholder="raza"
-                            id="raza" required [(ngModel)]="animalseleccionado.raza" name="raza">
-                </div>
-                <div class="form-group">
-                  <label for="nombre">nombre</label>
-                  <input type="text" class="form-control" placeholder="nombre"
-                            id="nombre" required [(ngModel)]="animalseleccionado.nombre" name="nombre">
-                </div>
-                <div class="form-floating mb-3">
-                  <app-datepicker-adapter (newItemEvent)="addItem($event)"></app-datepicker-adapter>    <!-- Aqui paso desde -->
-              </div>
-             </form>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>

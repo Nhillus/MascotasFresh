@@ -50,7 +50,8 @@ export class ProductComponent implements OnInit {
 
   getProductos() {
     this.servicios
-        .getProductos().subscribe((data:any=[Product])=>{
+        .getProductos()
+        .subscribe((data:any=[Product])=>{
           this.productos = data.productos;
           console.log(this.productos);
         })

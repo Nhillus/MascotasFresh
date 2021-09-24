@@ -1,6 +1,23 @@
-
-  <app-navbar></app-navbar>
-  <hr>
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Mascotas Fresh</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="#">Sign out</a>
+    </div>
+  </div>
+</header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-lg-2 ">
+      <app-sidebar></app-sidebar>
+    </div>
+  </div>
+</div>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
   <hr>
   <div class="container">
     <h3 *ngIf="user">  Hola Asistente {{this.user?.name}}</h3> <!-- use ?. porque no existe la plantilla en el animal ts, por eso uso la etiqueta que tendrias un comportamiento parecido al any, tambien una solucion seria usar nngIf como tambien deje en el codigo en el caso que no exista el usuario sabe que hacer y no lo rederiza-->
@@ -14,156 +31,88 @@
       </div>
     </div>
   </div>
-<!-- --------------------------------------------------formulario para agregar nuevos animalesss (pacientes) ------------------------------------------------>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="checkoutForm" (ngSubmit)="addProducto()">
-          <h3 class="text-center"> Nuevo Producto</h3>
-          <div class="form-floating mb-3">
-            <input id="floatingNombre" type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-            <label for="floatingNombre">Nombre</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingCantidad" type="text" class="form-control" formControlName="cantidad" placeholder="Cantidad">
-            <label for="floatingCantidad">Cantidad</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingPrecio" type="text" class="form-control" formControlName="precio" placeholder="Precio">
-            <label for="floatingPrecio">Precio</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingLote" type="text" class="form-control" formControlName="lote" placeholder="Lote">
-            <label for="floatingLote">Lote</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingCreado" type="text" class="form-control" formControlName="creado" placeholder="Creado">
-            <label for="floatingCreado">Creado</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input id="floatingVencimiento" type="text" class="form-control" formControlName="vencimiento" placeholder="Vencimiento">
-            <label for="floatingVencimiento">Vencimiento</label>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px;"  data-bs-dismiss="modal" aria-label="Close">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
   <div class="container">
     <div class="row">
       <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">
+                Nombre
+              </th>
+              <th scope="col">
+                Cantidad
+              </th>
+              <th scope="col">
+                Precio
+              </th>
+              <th scope="col">
+                lote
+              </th>
+              <th scope="col">
+                creado
+              </th>
+              <th scope="col">
+                vencimiento
+              </th>
+              <th scope="col">Acciones
+              </th>
+            </tr>
+            <tr>
+              <th>
+              </th>
+              <th>
+                <input name="nombre" #inputEspecie [(ngModel)]="this.campoNombre" (input)='search("nombre","campoNombre")' class="form-control me-2" type="search"  aria-label="Search">
+              </th>
+              <th>
+                <input name="cantidad" #inputRaza [(ngModel)]="this.campoCantidad" (input)='search("cantidad","campoCantidad")' class="form-control me-2" type="search"  aria-label="Search">
+              </th>
+              <th>
+                <input name="precio" #inputNombre [(ngModel)]="this.campoPrecio" (input)='search("precio","campoPrecio")' class="form-control me-2" type="search"  aria-label="Search">
+              </th>
+              <th>
+                <input name="lote" #inputNacimiento [(ngModel)]="this.campoLote" (input)='search("lote","campoLote")' class="form-control me-2" type="search"  aria-label="Search">
+              </th>
+              <th>
+                <input name="creado" #inputNacimiento [(ngModel)]="this.campoCreado" (input)='search("creado","campoCreado")' class="form-control me-2" type="search"  aria-label="Search">
+              </th>
+              <th>
+                <input name="vencimiento" #inputNacimiento [(ngModel)]="this.campoVencimiento" (input)='search("vencimiento","campoVencimiento")' class="form-control me-2" type="search"  aria-label="Search">
+              </th>
+              <th>
+              </th>
+              <th>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let product of productos">
+            <tr>
+              <th scope="row">{{product.id}}</th>
+              <td>{{product.nombre}}  </td>
+              <td>{{product.cantidad}}</td>
+              <td>{{product.precio}}</td>
+              <td>{{product.lote}}</td>
+              <td>{{product.creado}}</td>
+              <td>{{product.vencimiento}}</td>
+              <td><div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Acciones
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateTodo-modal" (click)="productoSeleccionado(product)" >Editar Producto</a></li>
+                  <li><a class="dropdown-item" (click)="eliminarProducto(product)" >Eliminar Producto</a></li>
+                </ul>
+              </div></td>
+            </tr>
 
-
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">
-          Nombre
-        </th>
-        <th scope="col">
-          Cantidad
-        </th>
-        <th scope="col">
-          Precio
-        </th>
-        <th scope="col">
-          lote
-        </th>
-        <th scope="col">
-          creado
-        </th>
-        <th scope="col">
-          vencimiento
-        </th>
-        <th scope="col">Acciones
-        </th>
-      </tr>
-      <tr>
-        <th>
-        </th>
-        <th>
-          <input name="nombre" #inputEspecie [(ngModel)]="this.campoNombre" (input)='search("nombre","campoNombre")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="cantidad" #inputRaza [(ngModel)]="this.campoCantidad" (input)='search("cantidad","campoCantidad")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="precio" #inputNombre [(ngModel)]="this.campoPrecio" (input)='search("precio","campoPrecio")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="lote" #inputNacimiento [(ngModel)]="this.campoLote" (input)='search("lote","campoLote")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="creado" #inputNacimiento [(ngModel)]="this.campoCreado" (input)='search("creado","campoCreado")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-          <input name="vencimiento" #inputNacimiento [(ngModel)]="this.campoVencimiento" (input)='search("vencimiento","campoVencimiento")' class="form-control me-2" type="search"  aria-label="Search">
-        </th>
-        <th>
-        </th>
-        <th>
-        </th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let product of productos">
-      <tr>
-        <th scope="row">{{product.id}}</th>
-        <td>{{product.nombre}}  </td>
-        <td>{{product.cantidad}}</td>
-        <td>{{product.precio}}</td>
-        <td>{{product.lote}}</td>
-        <td>{{product.creado}}</td>
-        <td>{{product.vencimiento}}</td>
-        <td><div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Acciones
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateTodo-modal" (click)="productoSeleccionado(product)" >Editar Producto</a></li>
-            <li><a class="dropdown-item" (click)="eliminarProducto(product)" >Eliminar Producto</a></li>
-          </ul>
-        </div></td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <div class="modal fade" id="Modalcita" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">agregar nueva cita </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-
-            <app-cita [idanimalcita]="id_animal" ></app-cita>
-
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-
-  </div>
-
+</main>
   <!-- Modal -->
 <div class="modal fade" id="updateTodo-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -218,3 +167,47 @@
     </div>
   </div>
 </div>
+<!-- --------------------------------------------------formulario para agregar nuevos animalesss (pacientes) ------------------------------------------------>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="checkoutForm" (ngSubmit)="addProducto()">
+          <h3 class="text-center"> Nuevo Producto</h3>
+          <div class="form-floating mb-3">
+            <input id="floatingNombre" type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+            <label for="floatingNombre">Nombre</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingCantidad" type="text" class="form-control" formControlName="cantidad" placeholder="Cantidad">
+            <label for="floatingCantidad">Cantidad</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingPrecio" type="text" class="form-control" formControlName="precio" placeholder="Precio">
+            <label for="floatingPrecio">Precio</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingLote" type="text" class="form-control" formControlName="lote" placeholder="Lote">
+            <label for="floatingLote">Lote</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingCreado" type="text" class="form-control" formControlName="creado" placeholder="Creado">
+            <label for="floatingCreado">Creado</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input id="floatingVencimiento" type="text" class="form-control" formControlName="vencimiento" placeholder="Vencimiento">
+            <label for="floatingVencimiento">Vencimiento</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px;"  data-bs-dismiss="modal" aria-label="Close">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->

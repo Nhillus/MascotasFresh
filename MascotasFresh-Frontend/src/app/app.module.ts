@@ -15,6 +15,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { CitaComponent } from './cita/cita.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './product/product.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 
@@ -30,6 +31,7 @@ import { ProductComponent } from './product/product.component';
     CitaComponent,
     AdminComponent,
     ProductComponent,
+    SidebarComponent,
 
 
   ],
