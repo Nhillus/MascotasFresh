@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../servicios.service';
 import { FormBuilder,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User} from '../user';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class AdminComponent implements OnInit {
   constructor(private servicios:ServiciosService,
               private formBuilder: FormBuilder,
               private router:Router) { }
-  
+
   userForm = this.formBuilder.group({
     name:['',Validators.required],
     email:['',Validators.required, , Validators.required],
@@ -23,11 +24,7 @@ export class AdminComponent implements OnInit {
     rol_id: ['',Validators.required],
   });
 
-  user: {
-    id:any,
-    name:any,
-    email:any,
-  };
+  user:User;
 
   animaless: Array<any> = [];
   usuarioseleccionado:any;
@@ -37,7 +34,7 @@ export class AdminComponent implements OnInit {
 
   usuarios:any=[];
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.getUser();
     this.getUsuarios();
     this.getRoles();
@@ -60,9 +57,9 @@ export class AdminComponent implements OnInit {
   getUsuarios() {
     this.servicios
         .getUsers().subscribe((data:any=[])=>{
-          this.usuarios = data.usuarios;  
-          console.log(this.usuarios);            
-        })  
+          this.usuarios = data.usuarios;
+          console.log(this.usuarios);
+        })
   }
   saveUsuario() {
     console.log(this.userForm);
@@ -109,7 +106,7 @@ export class AdminComponent implements OnInit {
     this.servicios
         .conseguirroles().subscribe((data:any=[])=>{
           this.rolesdisponibles = data.roles;
-          console.log(this.rolesdisponibles)              
-        })  
+          console.log(this.rolesdisponibles)
+        })
   }
 }
