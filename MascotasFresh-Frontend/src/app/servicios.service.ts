@@ -84,4 +84,7 @@ export class ServiciosService {
   eliminarProducto(id:any) {
     return this.http.delete(API_URL+'/deleteproducto'+'/'+id,this.options);
   }
+  getNotificaciones() {
+    return this.http.get(API_URL+'/notifications',this.options);
+  }
 }
