@@ -11,8 +11,7 @@
       <li *ngFor="let notificacion of notificaciones">
         <tr>
           <th>
-            <a class="dropdown-item" href="#"> {{notificacion.nombre}} </a>
-            <a class="dropdown-item" href="#"> {{notificacion.product_id}} </a>
+            <a class="dropdown-item" href="#"> {{notificacion.nombre}} {{notificacion.ProductoNombre}} {{notificacion.ProductoCantidad}} </a>
           </th>
         </tr>
       </li>
