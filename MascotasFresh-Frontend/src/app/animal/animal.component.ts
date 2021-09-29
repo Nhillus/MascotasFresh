@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ServiciosService } from '../servicios.service';
 import { DatepickerAdapterComponent } from '../datepicker-adapter/datepicker-adapter.component';
@@ -7,6 +7,7 @@ import { error } from 'protractor';
 import { Router } from '@angular/router';
 import { Animal } from '../animal';
 import { User } from '../user';
+import { HistoriaComponent } from '../historia/historia.component';
 
 @Component({
   selector: 'app-animal',
@@ -22,12 +23,12 @@ export class AnimalComponent implements OnInit {
   raza:string;
   animalseleccionado:Animal;
   animaless: Array<Animal> = [];
+  @ViewChild(HistoriaComponent) child:HistoriaComponent;
 
   addItem(newItem: string) {
     this.items=newItem;      //output que recibo del hijo hacia el padre (animal.component.ts)
     console.log(this.items);
   }
-
   checkoutForm = this.formBuilder.group({
     especie: '',
     raza: '',
@@ -49,9 +50,19 @@ export class AnimalComponent implements OnInit {
 
   ngOnInit(): void {
    this.getUser();
-    this.getAnimales();
+   //this.getAnimalesByDoc();
+   this.getAnimales();
   }
 
+  //No sirve en este contexto por ahora.
+  getAnimalesByDoc() {
+    this.servicios
+        .getAnimalByDoc().subscribe((data:any=[Animal])=>{
+          this.animales = data.animales;
+          console.log(this.animales);
+          console.log(data);
+        })
+  }
   getAnimales() {
     this.servicios
         .getAnimal().subscribe((data:any=[Animal])=>{
@@ -121,11 +132,21 @@ export class AnimalComponent implements OnInit {
      )
     }
 
-     id_animal:number;
+    id_animal:number;
 
     seleccionado(animal:number){
       this.id_animal=animal;
       console.log(this.id_animal);
+    }
+    selecionadoHistoria(animal:number) {
+      this.id_animal=animal;
+      console.log(this.id_animal);
+       this.historia();
+    }
+
+     historia(){
+     this.child.getCitasPorAnimal(this.id_animal);
+
     }
 
     search(campo,escritura) {                                                               //Este metodo hace una busqueda separada por campo entre los 4 campos del html(Especie,Raza,Nombre,Animal), lo hace

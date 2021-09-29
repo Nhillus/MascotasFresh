@@ -7,7 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { CitaComponent } from './cita/cita.component';
-import { ProductComponent } from './product/product.component'
+import { ProductComponent } from './product/product.component';
+import { HistoriaComponent } from './historia/historia.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,8 +16,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'cita', component:CitaComponent },
-  { path: 'admin',component:AdminComponent },
-  { path: 'producto', component:ProductComponent }
+  { path: 'admin', component:AdminComponent },
+  { path: 'producto', component:ProductComponent },
+  { path: 'historia', component:HistoriaComponent }
 
 ]; // sets up routes constant where you define your routes
 

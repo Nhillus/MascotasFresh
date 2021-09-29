@@ -23,6 +23,7 @@ Route::get('/user', 'UserController@user')->middleware('auth:api');
 Route::middleware(['auth:api','rol'])->group(function() {
     /*-------------------------------------------- Rutas Animales -------------------------------------*/
     Route::middleware(['scope:Admin,Medico'])->get('/animales','AnimalController@index');
+    Route::middleware(['scope:Admin,Medico'])->get('/animalesByDoc','AnimalController@indexByDoc'); //lo mismo que su controlador ya que en este contexto no sirve
     Route::middleware(['scope:Admin,Medico'])->post('/agregaranimal', 'AnimalController@store');
     Route::middleware(['scope:Admin,Medico'])->put('/modificaranimal', 'AnimalController@update');
     Route::middleware(['scope:Admin,Medico'])->delete('/eliminaranimal/{id}', 'AnimalController@destroy');
@@ -30,6 +31,7 @@ Route::middleware(['auth:api','rol'])->group(function() {
     /*-----------------------------------------------citas------------------------------------------------*/
     Route::middleware(['scope:Admin,Medico'])->post('/agregarcita', 'MedicoServicioAnimalController@store');
     Route::middleware(['scope:Admin,Medico'])->get('/serviciosDisponibles','ServicioController@index');
+    Route::middleware(['scope:Admin,Medico'])->get('/citasAnimal/{id}','MedicoServicioAnimalController@citasByAnimal');
 
     /*--------------------------------Rutas Usuario ---------------------------------*/
     //Route::post('/registro', 'UserController@register'); no usaremos el registro hasta que existan algunos usuarios fuera de la veterinaria

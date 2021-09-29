@@ -3,6 +3,7 @@
 namespace App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use App\Cuidador;
 use App\User;
 use App\Servicio;
@@ -101,6 +102,29 @@ class Animal extends Model
                                         ->select('users.name','users.email','animals.nombre as nombre del animal','servicios.nombre as nombre_del_servicio', 'medico_servicio_animals.fecha as fecha_de_la_cita')
                                         ->orderby('fecha','desc')->take(3)->get();
             $animal['citas']= $citas;
+        }
+        return $animales;
+    }
+    //no tiene sentido en el contexto de la app en este momento dejarlo para usarlo en querrys de un medico solamente
+    public function getAllAnimalesByDoctor(Request $request) {
+        $User = $request->user();
+        //$ModelUser = User::findOrFail($User->id);
+        $animales = DB::table('animals')->join('medico_servicio_animals','animals.id','=','medico_servicio_animals.animal_id')
+                                      ->join('users','medico_servicio_animals.user_id','=','users.id')
+                                      ->join('servicios','medico_servicio_animals.servicio_id','=','servicios.id')
+                                      ->where('users.id','=',$User->id)
+                                      ->select('animals.id','animals.especie','animals.raza','animals.nombre','animals.nacimiento','animals.esterilizado')
+                                      ->get();;
+        //Funcionalidad de ultimas citas
+        foreach ($animales as $animal) {
+            //
+            $citas =  DB::table('users')->join('medico_servicio_animals','users.id','=','medico_servicio_animals.user_id')
+                                        ->join('animals','medico_servicio_animals.animal_id','=','animals.id')
+                                        ->join('servicios','medico_servicio_animals.servicio_id','=','servicios.id')
+                                        ->where('animals.id','=',$animal->id)
+                                        ->select('users.name','users.email','animals.nombre as nombre del animal','servicios.nombre as nombre_del_servicio', 'medico_servicio_animals.fecha as fecha_de_la_cita')
+                                        ->orderby('fecha','desc')->take(3)->get();
+            $animal->citas= $citas;
         }
         return $animales;
     }

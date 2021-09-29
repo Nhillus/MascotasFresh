@@ -72,7 +72,7 @@
             <tbody *ngFor="let animal of animales">
               <tr>
                 <th scope="row">{{animal.id}}</th>
-                <td> {{animal.especie}}  </td>
+                <td>{{animal.especie}}</td>
                 <td>{{animal.raza}}</td>
                 <td>{{animal.nombre}}</td>
                 <td>{{animal.nacimiento}}</td>
@@ -86,12 +86,12 @@
                   </li>
                 </td>
                 <td><div class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" (click)="selecionadoHistoria(animal.id)" aria-expanded="false">
                     Acciones
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" (click)="seleccionado(animal.id)" data-bs-toggle="modal" data-bs-target="#Modalcita" >Nueva Cita </a></li>
-                    <li><a class="dropdown-item" href="#">Historia Medica</a></li>
+                    <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#Modalhistoria" >Historia Medica</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateTodo-modal" (click)="animalSeleccionado(animal)" >Editar Paciente</a></li>
                     <li><a class="dropdown-item" (click)="eliminarAnimal(animal)" >Eliminar Paciente</a></li>
@@ -203,7 +203,28 @@
     </div>
   </div>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+<!-----------------------------------------------------------Modal Historia Medica-------------------------------------------------------------------------------->
 
+    <div class="modal fade" id="Modalhistoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Historia medica paciente </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <app-historia  ></app-historia>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 
 

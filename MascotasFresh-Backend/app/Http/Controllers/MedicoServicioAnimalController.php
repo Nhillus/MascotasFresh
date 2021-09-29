@@ -17,6 +17,12 @@ class MedicoServicioAnimalController extends Controller
         //
     }
 
+    public function citasByAnimal(Request $request) {
+        $citas = new medico_servicio_animal;
+        $response = $citas->citaPorAnimal($request);
+        return $response;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

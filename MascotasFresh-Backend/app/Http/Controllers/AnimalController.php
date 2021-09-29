@@ -18,6 +18,11 @@ class AnimalController extends Controller
         $allAnimales = $animal->getAllAnimales();
         return ['animales'=> $allAnimales];
     }
+    public function indexByDoc(Request $request) {
+        $animal = new Animal;
+        $allAnimales = $animal->getAllAnimalesByDoctor($request);
+        return ['animales'=> $allAnimales];
+    }
     public function store(Request $request) {
             $animal = new Animal;
             $response=$animal->Animal($request);

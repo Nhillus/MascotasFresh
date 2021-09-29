@@ -1,0 +1,39 @@
+<div class="container">
+  <div>
+
+  </div>
+  <div class="row">
+    <div class="col-10">
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card" style="width: 18rem;" *ngFor="let cita of citas">
+        <div class="card-body">
+          <ul>
+            <li> Medico tratante: {{cita.name}}</li>
+            <li> Descripcion: {{cita.descripcion}}</li>
+            <li> correo del medico: {{cita.email}}</li>
+            <li> Raza: {{cita.especie}}</li>
+            <li> Esterilizado: {{cita.esterilizado}}</li>
+            <li> Fecha de la cita: {{cita.fecha_de_la_cita}}</li>
+            <li> Nacimiento: {{cita.nacimiento}}</li>
+            <li> Nombre del paciente: {{cita.nombre_del_animal}}</li>
+            <li> Servicio dado: {{cita.nombre_del_servicio }}</li>
+            <li> Raza: {{cita.raza}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+   <!--- <li><a class="dropdown-item" (click)="getCitasPorAnimal()" data-bs-toggle="modal" data-bs-target="#Modalhistoria" >Historia Medica</a></li> -->
+    <p>
+        Today's item: {{animalseleccionado}}
+      </p>
+</div>
+</div>

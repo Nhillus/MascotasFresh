@@ -16,6 +16,7 @@ import { CitaComponent } from './cita/cita.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './product/product.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HistoriaComponent } from './historia/historia.component';
 
 
 
@@ -32,6 +33,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AdminComponent,
     ProductComponent,
     SidebarComponent,
+    HistoriaComponent,
 
 
   ],

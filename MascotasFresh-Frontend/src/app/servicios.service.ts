@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
+import { User } from './user';
 
 const API_URL: string = 'http://localhost:8000/api';
 @Injectable({
   providedIn: 'root',
-
-
 })
 
 export class ServiciosService {
-  user:any;
+  user:User;
 
     headers = new HttpHeaders({
       'Accept':'application/json',
@@ -25,6 +24,9 @@ export class ServiciosService {
     return this.http.get(API_URL+'/animales',this.options);
   }
 
+  getAnimalByDoc() {
+    return this.http.get(API_URL+'/animalesByDoc',this.options);
+  }
 
   addAnimal(animal:any) {
     return this.http.post(API_URL+'/agregaranimal', animal,this.options);
@@ -32,12 +34,10 @@ export class ServiciosService {
 
   editarAnimal(animal:any){
     return this.http.put(API_URL+'/modificaranimal', animal,this.options);
-
   }
 
   eliminarAnimal(id:any){
     return  this.http.delete(API_URL+'/eliminaranimal'+'/'+id,this.options);
-
   }
 
   addCita(cita:any) {
@@ -86,5 +86,8 @@ export class ServiciosService {
   }
   getNotificaciones() {
     return this.http.get(API_URL+'/notifications',this.options);
+  }
+  getCitasByAnimal(id:number) {
+    return this.http.get(API_URL+'/citasAnimal'+'/'+id,this.options);
   }
 }
